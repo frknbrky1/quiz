@@ -94,7 +94,7 @@ class QuestionController extends Controller
     {
         if($request->hasFile('image')) {
 
-            $deleteOldImg = Question::find($question_id);
+            $deleteOldImg = Quiz::find($quiz_id)->questions()->whereId($question_id)->first();
             if(File::exists($deleteOldImg->image)) {
                 File::delete(public_path($deleteOldImg->image));
             }
@@ -118,8 +118,13 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($quiz_id, $question_id)
     {
-        //
+        $deleteImg = Quiz::find($quiz_id)->questions()->whereId($question_id)->first();
+        if(File::exists($deleteImg->image)) {
+            File::delete(public_path($deleteImg->image));
+        }
+        Quiz::find($quiz_id)->questions()->whereId($question_id)->delete();
+        return redirect()->route('questions.index', $quiz_id)->withSuccess('Soru Başarıyla Silindi');
     }
 }

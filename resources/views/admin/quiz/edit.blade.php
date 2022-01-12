@@ -7,11 +7,19 @@
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Quiz Başlığı*</label>
-                    <input type="text" name="title" class="form-control" value="{{$quiz->title}}" >
+                    <input type="text" name="title" class="form-control" value="{{$quiz->title}}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Quiz Açıklama</label>
                     <textarea name="description" class="form-control" rows="4">{{$quiz->description}}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Quiz Durumu</label>
+                    <select name="status" class="form-select form-select-sm">
+                        <option @if($quiz->questions_count < 4) disabled @endif @if($quiz->status === 'publish') selected @endif value="publish">Aktif</option>
+                        <option @if($quiz->status === 'passive') selected @endif value="passive">Pasif</option>
+                        <option @if($quiz->status === 'draft') selected @endif value="draft">Taslak</option>
+                    </select>
                 </div>
                 <div class="mb-3 form-check">
                     <input class="form-check-input" @if($quiz->finished_at) checked @endif type="checkbox" id="isFinished">
