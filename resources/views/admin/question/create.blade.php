@@ -16,13 +16,13 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">1. Cevap</label>
-                            <textarea name="answer1" class="form-control" rows="4">{{old('answer1')}}</textarea>
+                            <textarea name="answer1" class="form-control" rows="2">{{old('answer1')}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">2. Cevap</label>
-                            <textarea name="answer2" class="form-control" rows="4">{{old('answer2')}}</textarea>
+                            <textarea name="answer2" class="form-control" rows="2">{{old('answer2')}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -30,13 +30,13 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">3. Cevap</label>
-                            <textarea name="answer3" class="form-control" rows="4">{{old('answer3')}}</textarea>
+                            <textarea name="answer3" class="form-control" rows="2">{{old('answer3')}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">4. Cevap</label>
-                            <textarea name="answer4" class="form-control" rows="4">{{old('answer4')}}</textarea>
+                            <textarea name="answer4" class="form-control" rows="2">{{old('answer4')}}</textarea>
                         </div>
                     </div>
                 </div>
