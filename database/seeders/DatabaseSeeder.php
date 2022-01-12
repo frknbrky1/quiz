@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             QuizSeeder::class,
+            QuestionSeeder::class,
         ]);
-        
+
         /*\App\Models\User::insert([
             'name' => 'Furkan Berkay',
             'email' => 'fb0990@hotmail.com',
