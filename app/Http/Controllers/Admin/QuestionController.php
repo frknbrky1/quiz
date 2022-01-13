@@ -10,6 +10,7 @@ use App\Http\Requests\QuestionCreateRequest;
 use App\Http\Requests\QuestionUpdateRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -44,6 +45,7 @@ class QuestionController extends Controller
      */
     public function store(QuestionCreateRequest $request, $id)
     {
+        //dd(Auth::user()->id);
         if($request->hasFile('image')) {
             $fileName = substr(Str::slug($request->question), 0, 210).'.'.$request->image->extension();
             $fileNameWithUpload = 'uploads/'.$fileName;
@@ -54,7 +56,11 @@ class QuestionController extends Controller
             ]);
             //$request->image = $fileNameWithUpload;
         }
-        Quiz::find($id)->questions()->create($request->post());
+
+        $createQuiz = Quiz::find($id);
+        $createQuiz->admin_who_update = Auth::user()->id;
+        $createQuiz->save();
+        $createQuiz->questions()->create($request->post());
 
         return redirect()->route('questions.index', $id)->withSuccess('Soru Başarıyla Oluşturuldu');
         //return $request->post();
@@ -107,7 +113,12 @@ class QuestionController extends Controller
                 'image' => $fileNameWithUpload
             ]);
         }
-        Quiz::find($quiz_id)->questions()->whereId($question_id)->first()->update($request->post());
+
+        $updateQuiz = Quiz::find($quiz_id);
+        $updateQuiz->admin_who_update = Auth::user()->id;
+        $updateQuiz->save();
+
+        $updateQuiz->questions()->whereId($question_id)->first()->update($request->post());
 
         return redirect()->route('questions.index', $quiz_id)->withSuccess('Soru Başarıyla Güncellendi');
     }
@@ -124,7 +135,12 @@ class QuestionController extends Controller
         if(File::exists($deleteImg->image)) {
             File::delete(public_path($deleteImg->image));
         }
-        Quiz::find($quiz_id)->questions()->whereId($question_id)->delete();
+
+        $deleteQuiz = Quiz::find($quiz_id);
+        $deleteQuiz->admin_who_update = Auth::user()->id;
+        $deleteQuiz->save();
+
+        $deleteQuiz->questions()->whereId($question_id)->delete();
         return redirect()->route('questions.index', $quiz_id)->withSuccess('Soru Başarıyla Silindi');
     }
 }

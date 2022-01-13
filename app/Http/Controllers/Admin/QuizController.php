@@ -25,6 +25,12 @@ class QuizController extends Controller
         if(request()->get('status')) {
             $quizzes = $quizzes->where('status', request()->get('status'));
         }
+        if(request()->get('myCreate')) {
+            $quizzes = $quizzes->where('admin_who_created', request()->get('myCreate'));
+        }
+        if(request()->get('myUpdate')) {
+            $quizzes = $quizzes->where('admin_who_update', request()->get('myUpdate'));
+        }
 
         $quizzes = $quizzes->paginate(5);
         return view('admin.quiz.list', compact('quizzes'));
@@ -49,6 +55,7 @@ class QuizController extends Controller
      */
     public function store(QuizCreateRequest $request)
     {
+        //dd($request->post());
         Quiz::create($request->post());
         return redirect()->route('quizzes.index')->withSuccess('Quiz Başarıyla oluşturuldu');
         //return $request->post();

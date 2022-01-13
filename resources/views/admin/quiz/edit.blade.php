@@ -2,9 +2,12 @@
     <x-slot name="header">Quiz Güncelle</x-slot>
     <div class="card">
         <div class="card-body">
+
+            <a href="{{route('questions.index', $quiz->id)}}" class="btn btn-sm btn-warning float-end" title="Sorular"><i class="fa fa-question"></i> Quizin Soruları</a><br>
             <form method="POST" action="{{route('quizzes.update', $quiz->id)}}">
                 @method('PUT')
                 @csrf
+                <input type="hidden" name="admin_who_update" value="{{Auth::user()->id}}">
                 <div class="mb-3">
                     <label class="form-label">Quiz Başlığı*</label>
                     <input type="text" name="title" class="form-control" value="{{$quiz->title}}">

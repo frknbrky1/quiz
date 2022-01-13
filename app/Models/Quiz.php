@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class Quiz extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description', 'finished_at'];
+    protected $fillable = ['title', 'description', 'finished_at', 'admin_who_created', 'admin_who_update'];
 
     protected $dates = ['finished_at'];
 

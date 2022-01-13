@@ -7,7 +7,7 @@
             </h5>
             <form method="GET" action="">
                 <div class="row">
-                    <h6><i class="fa fa-search"></i><b> Arama Yap</b></h6>
+                    <h6><i class="fa fa-search"></i><b> Tüm Quizlerde Ara</b></h6>
                     <div class="col-md-2">
                         <input type="text" name="title" placeholder="Quiz Adı.." value="{{request()->get('title')}}" class="form-control form-control-sm">
                     </div>
@@ -35,6 +35,15 @@
                         <th scope="col">Durum</th>
                         <th scope="col">Bitiş Tarihi</th>
                         <th scope="col">İşlemler</th>
+                        <th scope="col">
+                            <form method="GET" action="">
+                                <div class="btn-group float-end" role="group" aria-label="Button group with nested dropdown">
+                                    <button class="btn btn-sm btn-info" name="myCreate" value="{{Auth::user()->id}}"><b>Oluşturduklarım</b></button>
+                                    <button class="btn btn-sm btn-light" name="myUpdate" value="{{Auth::user()->id}}"><b>Güncellediklerim</b></button>
+                                    <a href="{{route('quizzes.index')}}" class="btn btn-sm btn-success" title="Sil"><b>Tüm Quizler</b></a>
+                                </div>
+                            </form>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +73,13 @@
                                 <a href="{{route('questions.index', $quiz->id)}}" class="btn btn-sm btn-warning" title="Sorular"><i class="fa fa-question"></i></a>
                                 <a href="{{route('quizzes.edit', $quiz->id)}}" class="btn btn-sm btn-primary" title="Düzenle"><i class="fa fa-pen"></i></a>
                                 <a href="{{route('quizzes.destroy', $quiz->id)}}" class="btn btn-sm btn-danger" title="Sil"><i class="fa fa-times"></i></a>
+                            </td>
+                            <td>
+                                <i style="font-size: smaller">
+                                    <b>Oluşturan: </b>@if(\App\Models\User::find($quiz->admin_who_created)) {{\App\Models\User::find($quiz->admin_who_created)->name}} @endif
+                                    <br>
+                                    <b>Son Güncelleyen: </b>@if(\App\Models\User::find($quiz->admin_who_update)) {{\App\Models\User::find($quiz->admin_who_update)->name}} @endif
+                                </i>
                             </td>
                         </tr>
                     @endforeach

@@ -4,6 +4,7 @@
         <div class="card-body">
             <form method="POST" action="{{route('quizzes.store')}}">
                 @csrf
+                <input type="hidden" name="admin_who_created" value="{{Auth::user()->id}}">
                 <div class="mb-3">
                     <label class="form-label">Quiz Başlığı*</label>
                     <input type="text" name="title" class="form-control" value="{{old('title')}}" >
@@ -24,7 +25,7 @@
                 </div>
                 <div class="mb-3 row justify-content-between">
                     <a href="{{ route('quizzes.index') }}" class="btn btn-danger btn-sm w-25">Vazgeç</a>
-                    <button type="submit" class="btn btn-success btn-sm w-25">Vazgeç</button>
+                    <button type="submit" class="btn btn-success btn-sm w-25">Quiz Oluştur</button>
                 </div>
             </form>
         </div>
