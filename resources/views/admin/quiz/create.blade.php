@@ -22,8 +22,9 @@
                     <label class="form-label">Bitiş Tarihi</label>
                     <input type="datetime-local" name="finished_at" id="reqDate" class="form-control" value="{{old('finished_at')}}">
                 </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success btn-sm w-100">Quiz Oluştur</button>
+                <div class="mb-3 row justify-content-between">
+                    <a href="{{ route('quizzes.index') }}" class="btn btn-danger btn-sm w-25">Vazgeç</a>
+                    <button type="submit" class="btn btn-success btn-sm w-25">Vazgeç</button>
                 </div>
             </form>
         </div>
@@ -32,11 +33,11 @@
         <script>
             $('#isFinished').change(function () {
                 if($(this).is(':checked')) {
-                    $('#finishedInput').show();
+                    $('#finishedInput').show('slow');
                     $("#reqDate").prop('required',true);
                 }
                 else {
-                    $('#finishedInput').hide();
+                    $('#finishedInput').hide('slow');
                     $("#reqDate").prop('required',false);
                 }
             });

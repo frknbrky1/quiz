@@ -43,14 +43,19 @@
                 <div class="mb-3">
                     <label class="form-label">Doğru Cevap</label>
                     <select name="correct_answer" class="form-select form-select-sm">
-                        <option @if(old('correct_answer') === 'answer1') selected @endif value="answer1">1. Cevap</option>
-                        <option @if(old('correct_answer') === 'answer2') selected @endif value="answer2">2. Cevap</option>
-                        <option @if(old('correct_answer') === 'answer3') selected @endif value="answer3">3. Cevap</option>
-                        <option @if(old('correct_answer') === 'answer4') selected @endif value="answer4">4. Cevap</option>
+                        <option @if(old('correct_answer') === 'answer1') selected @endif value="answer1">1. Cevap
+                        </option>
+                        <option @if(old('correct_answer') === 'answer2') selected @endif value="answer2">2. Cevap
+                        </option>
+                        <option @if(old('correct_answer') === 'answer3') selected @endif value="answer3">3. Cevap
+                        </option>
+                        <option @if(old('correct_answer') === 'answer4') selected @endif value="answer4">4. Cevap
+                        </option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success btn-sm w-100">Soruyu Oluştur</button>
+                <div class="mb-3 row justify-content-between">
+                    <a href="{{route('questions.index', $quiz->id)}}" class="btn btn-danger btn-sm w-25">Vazgeç</a>
+                    <button type="submit" class="btn btn-success btn-sm w-25">Soruyu Oluştur</button>
                 </div>
             </form>
         </div>

@@ -31,8 +31,9 @@
                     <label class="form-label">Bitiş Tarihi</label>
                     <input type="datetime-local" name="finished_at" id="reqDate" class="form-control" @if($quiz->finished_at) value="{{date('Y-m-d\TH:i', strtotime($quiz->finished_at))}}" @endif>
                 </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success btn-sm w-100">Quizi Güncelle</button>
+                <div class="mb-3 row justify-content-between">
+                    <a href="{{ route('quizzes.index') }}" class="btn btn-danger btn-sm w-25">Vazgeç</a>
+                    <button type="submit" class="btn btn-success btn-sm w-25">Quizi Güncelle</button>
                 </div>
             </form>
         </div>

@@ -63,8 +63,9 @@
                         </option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success btn-sm w-100">Soruyu Güncelle</button>
+                <div class="mb-3 row justify-content-between">
+                    <a href="{{route('questions.index', $question->quiz_id)}}" class="btn btn-danger btn-sm w-25">Vazgeç</a>
+                    <button type="submit" class="btn btn-success btn-sm w-25">Soruyu Güncelle</button>
                 </div>
             </form>
         </div>
