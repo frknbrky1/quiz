@@ -45,11 +45,11 @@
         <script>
             $('#isFinished').change(function () {
                 if($(this).is(':checked')) {
-                    $('#finishedInput').show();
+                    $('#finishedInput').show('slow');
                     $("#reqDate").prop('required',true);
                 }
                 else {
-                    $('#finishedInput').hide();
+                    $('#finishedInput').hide('slow');
                     $("#reqDate").prop('required',false);
                 }
             });
