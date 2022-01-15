@@ -13,7 +13,7 @@ class Quiz extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'description', 'slug', 'finished_at', 'admin_who_created', 'admin_who_update'];
+    protected $fillable = ['title', 'description', 'status', 'slug', 'finished_at', 'admin_who_created', 'admin_who_update'];
 
     protected $dates = ['finished_at'];
 
@@ -24,6 +24,30 @@ class Quiz extends Model
     public function questions() {
         return $this->hasMany('App\Models\Question');
     }
+
+    public function my_result() {
+        return $this->hasOne('App\Models\Result')->where('user_id', auth()->user()->id);
+    }
+
+    protected $appends = ['details'];
+
+    public function getDetailsAttribute() {
+        if($this->results()->count() > 0) {
+            return [
+                'avarage'   => round($this->results()->avg('point')),
+                'join_count' => $this->results()->count()
+            ];
+        }
+        return  null;
+    }
+
+    public function results() {
+        return $this->hasMany('App\Models\Result');
+    }
+
+
+
+
 
     /**
      * Return the sluggable configuration array for this model.

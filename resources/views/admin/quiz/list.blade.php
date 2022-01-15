@@ -49,7 +49,7 @@
                 <tbody>
                     @foreach($quizzes as $quiz)
                         <tr>
-                            <td>{{ $quiz->title }}</td>
+                            <td style="max-width: 445px">{{ $quiz->title }}</td>
                             <td>{{ $quiz->questions_count }}</td>
                             <td>
                                 @switch($quiz->status)
