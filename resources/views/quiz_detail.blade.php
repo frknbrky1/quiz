@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">{{$quiz->title}}</x-slot>
+
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">
@@ -43,6 +44,27 @@
                                 </li>
                             @endif
                         </ul>
+                        @if(count($quiz->topTen) > 0)
+                            <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">İlk 10</h5>
+                                <ul class="list-group">
+                                    @foreach($quiz->topTen as $result)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <strong class="h4">{{$loop->iteration}}. </strong>
+                                                <img class="h-8 w-8 rounded-full object-cover ml-3" src="{{$result->user->profile_photo_url}}">
+                                                <div class="ml-2">{{$result->user->name}}</div>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-success rounded-pill">{{$result->point}}</span>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <div class="col-md-8">
                         {{$quiz->description}}

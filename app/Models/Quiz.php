@@ -45,6 +45,10 @@ class Quiz extends Model
         return $this->hasMany('App\Models\Result');
     }
 
+    public function topTen() {
+        return $this->results()->orderByDesc('point')->take(10);
+    }
+
 
 
 
