@@ -48,8 +48,8 @@
                 </thead>
                 <tbody>
                     @foreach($quizzes as $quiz)
-                        <tr>
-                            <td style="max-width: 445px">{{ $quiz->title }}</td>
+                        <tr class="align-middle">
+                            <td style="max-width: 400px">{{ $quiz->title }}</td>
                             <td>{{ $quiz->questions_count }}</td>
                             <td>
                                 @switch($quiz->status)
@@ -80,6 +80,11 @@
                                     <br>
                                     <b>Son Güncelleyen: </b>@if(\App\Models\User::find($quiz->admin_who_update)) {{\App\Models\User::find($quiz->admin_who_update)->name}} @endif
                                 </i>
+                                @if(($quiz->finished_at < now() && $quiz->finished_at) && $quiz->status == 'publish')
+                                    <div class="text-danger" style="font-size: 10px">
+                                        Quizin süresi doldu, yayında değil. Bitiş tarihini değiştiriniz.
+                                    </div>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

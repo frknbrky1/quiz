@@ -103,7 +103,7 @@
                             <a href="{{route('quiz.join', $quiz->slug)}}" class="btn btn-warning btn-sm w-100 mt-2">
                                 Quizi Görüntüle <i class="fas fa-eye"></i>
                             </a>
-                        @else
+                        @elseif($quiz->finished_at > now() || $quiz->finished_at == null)
                             <a href="{{route('quiz.join', $quiz->slug)}}" class="btn btn-success btn-sm w-100 mt-2">
                                 Quize Katıl <i class="fas fa-sign-in-alt"></i>
                             </a>

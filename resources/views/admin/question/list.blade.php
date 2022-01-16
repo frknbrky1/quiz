@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                 @foreach($quiz->questions as $question)
-                    <tr>
+                    <tr class="align-middle">
                         <td>{{ $question->question }}</td>
                         <td class="align-middle">
                             @if($question->image)

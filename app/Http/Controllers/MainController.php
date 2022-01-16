@@ -10,17 +10,25 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function dashboard() {
-        $quizzes = Quiz::where('status', 'publish')->withCount('questions')->paginate(5);
-        return view('dashboard', compact('quizzes'));
+        $quizzes = Quiz::where('status', 'publish')->where(function($query) {
+            $query->whereNull('finished_at')->orWhere('finished_at', '>', now());
+        })->withCount('questions')->paginate(5);
+        $results  = auth()->user()->results;
+        return view('dashboard', compact('quizzes', 'results'));
     }
 
     public function quiz_detail($slug) {
-         $quiz = Quiz::whereSlug($slug)->with('my_result', 'topTen.user')->withCount('questions')->first() ?? abort(404, 'Quiz Bulunamadı.');
+        $quiz = Quiz::whereSlug($slug)->with('my_result', 'topTen.user')->withCount('questions')->first() ?? abort(404, 'Quiz Bulunamadı.');
         return view('quiz_detail', compact('quiz'));
     }
 
     public function quiz($slug) {
-        $quiz = Quiz::whereSlug($slug)->with('questions')->first() ?? abort(404, 'Quiz Bulunamadı.');
+        $quiz = Quiz::whereSlug($slug)->with('questions.my_answer', 'my_result')->first() ?? abort(404, 'Quiz Bulunamadı.');
+
+        if($quiz->my_result) {
+            return view('quiz_result', compact('quiz'));
+        }
+
         return view('quiz', compact('quiz'));
     }
 

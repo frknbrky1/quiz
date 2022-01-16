@@ -20,8 +20,21 @@
             </div>
         </div>
         <div class="col-md-4">
-            Abaculus velox pulchritudine est.
-            The meditation of your justices will sit silently when you feel that enlightenment is the sinner.
+            <div class="card">
+                <div class="card-header">
+                    Quiz Sonuçları
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach($results as $result)
+                        <li class="list-group-item">
+                            <strong title="Puanınız">{{$result->point}} </strong>-
+                            <a href="{{route('quiz.detail', $result->quiz->slug)}}">
+                                {{$result->quiz->title}}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 </x-app-layout>
