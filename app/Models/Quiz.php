@@ -29,7 +29,7 @@ class Quiz extends Model
         return $this->hasOne('App\Models\Result')->where('user_id', auth()->user()->id);
     }
 
-    protected $appends = ['details'];
+    protected $appends = ['details', 'my_rank'];
 
     public function getDetailsAttribute() {
         if($this->results()->count() > 0) {
@@ -38,7 +38,17 @@ class Quiz extends Model
                 'join_count' => $this->results()->count()
             ];
         }
-        return  null;
+        return null;
+    }
+
+    public function getMyRankAttribute() {
+        $rank = 0;
+        foreach($this->results()->orderByDesc('point')->get() as $result) {
+            $rank += 1;
+            if($result->user_id == auth()->user()->id) {
+                return $rank;
+            }
+        }
     }
 
     public function results() {
