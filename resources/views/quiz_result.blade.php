@@ -1,15 +1,25 @@
 <x-app-layout>
     <x-slot name="header">{{$quiz->title}} Sonucu</x-slot>
 
-    <div class="w-100 alert alert-secondary">
+    <div class="w-100 alert alert-warning">
         <div @if($quiz->my_result->point > 49) class="w-100 align-middle text-success" @else class="w-100 align-middle text-danger" @endif>
-            Puanın: <strong>{{$quiz->my_result->point}}</strong>
+           <u>Puanın: <strong>{{$quiz->my_result->point}}</strong></u>
         </div>
-        <div class="w-100 align-middle text-success text-end">
-            <i>Doğru Sayın </i> <small><i class="fa fa-arrow-alt-circle-right ml-1 mr-2"></i></small>{{$quiz->my_result->correct}}
-        </div>
-        <div class="w-100 align-middle text-danger text-end">
-            <i>Yanlış Sayın </i> <small><i class="fa fa-arrow-alt-circle-right ml-2 mr-2"></i></small>{{$quiz->my_result->wrong}}
+        <div class="row">
+            <div class="col-md-6 align-self-end">
+                <a href="{{route('quiz.detail', $quiz->slug)}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i>
+                    Quiz Detayı
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="w-100 align-middle text-success text-end">
+                    <i>Doğru Sayın </i> <small><i class="fa fa-arrow-alt-circle-right ml-1 mr-2"></i></small>{{$quiz->my_result->correct}}
+                </div>
+                <div class="w-100 align-middle text-danger text-end">
+                    <i>Yanlış Sayın </i> <small><i class="fa fa-arrow-alt-circle-right ml-2 mr-2"></i></small>{{$quiz->my_result->wrong}}
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="card">

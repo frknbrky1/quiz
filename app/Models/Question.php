@@ -24,6 +24,11 @@ class Question extends Model
         return $this->hasOne('App\Models\Answer')->where('user_id', auth()->user()->id);
     }
 
+    public function user_answer() {
+        return $this->hasMany('App\Models\Answer');
+            //->where('user_id', $user_id);
+    }
+
     public function getTruePercentAttribute() {
         $answer_count = $this->answers()->count();
         $true_answer = $this->answers()->where('answer', $this->correct_answer)->count();

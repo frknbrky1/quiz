@@ -30,7 +30,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Quiz</th>
+                        <th scope="col"  style="width: 300px">Quiz</th>
                         <th scope="col">Soru Sayısı</th>
                         <th scope="col">Durum</th>
                         <th scope="col">Bitiş Tarihi</th>
@@ -49,7 +49,7 @@
                 <tbody>
                     @foreach($quizzes as $quiz)
                         <tr class="align-middle">
-                            <td style="max-width: 400px">{{ $quiz->title }}</td>
+                            <td>{{ $quiz->title }}</td>
                             <td>{{ $quiz->questions_count }}</td>
                             <td>
                                 @switch($quiz->status)
@@ -70,6 +70,7 @@
                                 </span>
                             </td>
                             <td>
+                                <a href="{{route('quizzes.details', $quiz->id)}}" class="btn btn-sm btn-info text-white" title="Detaylar"><i class="fa fa-info-circle"></i></a>
                                 <a href="{{route('questions.index', $quiz->id)}}" class="btn btn-sm btn-warning" title="Sorular"><i class="fa fa-question"></i></a>
                                 <a href="{{route('quizzes.edit', $quiz->id)}}" class="btn btn-sm btn-primary" title="Düzenle"><i class="fa fa-pen"></i></a>
                                 <a href="{{route('quizzes.destroy', $quiz->id)}}" class="btn btn-sm btn-danger" title="Sil"><i class="fa fa-times"></i></a>

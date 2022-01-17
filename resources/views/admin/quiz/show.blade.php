@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">
-                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i>
+                <a href="{{ route('quizzes.index') }}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i>
                     Quizlere Dön
                 </a>
             </h5>
@@ -21,13 +21,6 @@
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#top" type="button" role="tab" aria-controls="profile" aria-selected="false">
                                         Top 10
-                                    </button>
-                                </li>
-                            @endif
-                            @if($quiz->my_result)
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="profile" aria-selected="false">
-                                        Senin Bilgilerin
                                     </button>
                                 </li>
                             @endif
@@ -73,42 +66,36 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="tab-pane fade" id="general" role="tabpanel" aria-labelledby="profile-tab">
-                                <ul class="list-group">
-                                    @if($quiz->my_result)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Puanınız:
-                                            <span @if($quiz->my_result->point > 49) class='badge bg-info rounded-pill' @else class='badge bg-danger rounded-pill' @endif>{{$quiz->my_result->point}}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Doğru / Yanlış Sayısı:
-                                            <div>
-                                                <span class="badge bg-success rounded-pill" title="Doğru">{{$quiz->my_result->correct}} Doğru</span>
-                                                <span class="badge bg-danger rounded-pill" title="Yanlış">{{$quiz->my_result->wrong}} Yanlış</span>
-                                            </div>
-                                        </li>
-                                    @endif
-                                    @if($quiz->my_rank)
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Sıralama:
-                                            <span class="badge bg-primary rounded-pill">#{{$quiz->my_rank}}</span>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-8">
                         {{$quiz->description}}
-                        @if($quiz->my_result)
-                            <a href="{{route('quiz.join', $quiz->slug)}}" class="btn btn-warning btn-sm w-100 mt-2">
-                                Quizi Görüntüle <i class="fas fa-eye"></i>
-                            </a>
-                        @elseif($quiz->finished_at > now() || $quiz->finished_at == null)
-                            <a href="{{route('quiz.join', $quiz->slug)}}" class="btn btn-success btn-sm w-100 mt-2">
-                                Quize Katıl <i class="fas fa-sign-in-alt"></i>
-                            </a>
-                        @endif
+                        <table class="table table-bordered  table-success table-striped mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ad Soyad</th>
+                                    <th scope="col">Puan</th>
+                                    <th scope="col">Doğru</th>
+                                    <th scope="col">Yanlış</th>
+                                    <th scope="col">Cevapları</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($quiz->results as $result)
+                                    <tr>
+                                        <td>{{$result->user->name}}</th>
+                                        <td>{{$result->point}}</td>
+                                        <td>{{$result->correct}}</td>
+                                        <td>{{$result->wrong}}</td>
+                                        <td>
+                                            <a href="{{route('result.user', [$result->user->id, $quiz->id])}}" class="btn btn-warning btn-sm w-100 mt-2">
+                                                Quizi Görüntüle <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </p>

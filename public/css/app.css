@@ -502,34 +502,6 @@ select{
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-.container{
-  width: 100%;
-}
-@media (min-width: 640px){
-  .container{
-    max-width: 640px;
-  }
-}
-@media (min-width: 768px){
-  .container{
-    max-width: 768px;
-  }
-}
-@media (min-width: 1024px){
-  .container{
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1280px){
-  .container{
-    max-width: 1280px;
-  }
-}
-@media (min-width: 1536px){
-  .container{
-    max-width: 1536px;
-  }
-}
 .prose{
   color: var(--tw-prose-body);
   max-width: 65ch;
@@ -891,9 +863,6 @@ select{
 .top-0{
   top: 0px;
 }
-.bottom-10{
-  bottom: 2.5rem;
-}
 .z-0{
   z-index: 0;
 }
@@ -1127,10 +1096,6 @@ select{
 }
 .translate-y-0{
   --tw-translate-y: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.rotate-90{
-  --tw-rotate: 90deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .scale-95{
@@ -1367,9 +1332,6 @@ select{
 }
 .p-6{
   padding: 1.5rem;
-}
-.p-3{
-  padding: 0.75rem;
 }
 .px-4{
   padding-left: 1rem;
