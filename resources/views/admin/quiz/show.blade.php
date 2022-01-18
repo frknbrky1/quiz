@@ -88,8 +88,8 @@
                                         <td>{{$result->correct}}</td>
                                         <td>{{$result->wrong}}</td>
                                         <td>
-                                            <a href="{{route('result.user', [$result->user->id, $quiz->id])}}" class="btn btn-warning btn-sm w-100 mt-2">
-                                                Quizi Görüntüle <i class="fas fa-eye"></i>
+                                            <a href="{{route('result.user', [$result->user->id, $quiz->id])}}" class="btn btn-warning btn-sm w-100">
+                                                Verdiği Cevaplar <i class="fas fa-eye"></i>
                                             </a>
                                         </td>
                                     </tr>

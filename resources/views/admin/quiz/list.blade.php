@@ -36,7 +36,7 @@
                         <th scope="col">Bitiş Tarihi</th>
                         <th scope="col">İşlemler</th>
                         <th scope="col">
-                            <form method="GET" action="">
+                            <form method="GET" action="" style="max-width: 90%">
                                 <div class="btn-group float-end" role="group" aria-label="Button group with nested dropdown">
                                     <button class="btn btn-sm btn-info" name="myCreate" value="{{Auth::user()->id}}"><b>Oluşturduklarım</b></button>
                                     <button class="btn btn-sm btn-light" name="myUpdate" value="{{Auth::user()->id}}"><b>Güncellediklerim</b></button>

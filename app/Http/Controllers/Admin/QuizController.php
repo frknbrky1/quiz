@@ -76,18 +76,15 @@ class QuizController extends Controller
 
     public function result_user($user_id, $quiz_id)
     {
-        //return $quiz = Quiz::whereId($quiz_id)->with('questions.user_answer', $user_id)->first() ?? abort(404, 'Quiz Bulunamadı.');
-        return $quiz = Quiz::whereId($quiz_id)->with('questions.user_answer')->get() ?? abort(404, 'Quiz Bulunamadı.');
+        $quiz = Quiz::whereId($quiz_id)->with(array(
+            'questions.answers' => function($query) use ($user_id) {
+                $query->where('user_id', $user_id);
+                },
+                'results' => function($query) use ($user_id) {
+                $query->where('user_id', $user_id)->with('user');
+            }))->first() ?? abort(404, 'Quiz Bulunamadı.');
 
-        if($quiz->my_result) {
-            return view('quiz_result', compact('quiz'));
-        }
-
-        return view('quiz', compact('quiz'));
-        return "sa";
-        $quiz = Quiz::with('topTen.user', 'results.user')->withCount('questions')->find($id) ?? abort(404, 'Quiz Bulunamadı.');
-
-        return view('admin.quiz.show', compact('quiz'));
+        return view('admin.quiz.user_result', compact('quiz'));
     }
 
     /**
