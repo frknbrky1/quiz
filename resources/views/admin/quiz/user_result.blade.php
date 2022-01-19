@@ -1,9 +1,4 @@
 <x-app-layout>
-    @php
-        foreach($quiz->results as $results) {
-            $result = $results;
-        }
-    @endphp
     <x-slot name="header">"{{$quiz->title}}" quizi, <u style="color: red">{{$result->user->name}}</u> tarafından verilen cevaplar</x-slot>
     <div class="w-100 alert alert-warning">
         <div @if($result->point > 49) class="w-100 align-middle text-success" @else class="w-100 align-middle text-danger" @endif>

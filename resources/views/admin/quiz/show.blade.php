@@ -70,7 +70,8 @@
                     </div>
                     <div class="col-md-8">
                         {{$quiz->description}}
-                        <table class="table table-bordered  table-success table-striped mt-3">
+                        @if($quiz->details)
+                            <table class="table table-bordered  table-success table-striped mt-3">
                             <thead>
                                 <tr>
                                     <th scope="col">Ad Soyad</th>
@@ -96,6 +97,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @endif
                     </div>
                 </div>
             </p>

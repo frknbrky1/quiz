@@ -84,7 +84,11 @@ class QuizController extends Controller
                 $query->where('user_id', $user_id)->with('user');
             }))->first() ?? abort(404, 'Quiz Bulunamadı.');
 
-        return view('admin.quiz.user_result', compact('quiz'));
+        foreach($quiz->results as $results) {
+            $result = $results;
+        }
+
+        return view('admin.quiz.user_result', compact('quiz', 'result'));
     }
 
     /**
